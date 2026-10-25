@@ -190,7 +190,7 @@
 
       if (!ok) { showToast('Confira os campos destacados.', true); return; }
 
-      const btn = $('.btn', form), span = $('span', btn), txt = span.textContent;
+      const btn = $('[type="submit"]', form), span = $('span', btn), txt = span.textContent;
       btn.classList.add('is-loading'); span.textContent = 'Aguarde…';
       setTimeout(() => {   // TODO: aqui você pode salvar os dados (API) antes de avançar
         btn.classList.remove('is-loading'); span.textContent = txt;
@@ -253,6 +253,24 @@
 
   // Passo 5: pular
   $('#skipLast').addEventListener('click', () => goStep(6));
+
+  // Passo 3: CPF opcional
+const cpfInput = $('#w-cpf');
+const cpfContinue = $('#cpfContinue');
+
+// Toda vez que a pessoa digita, verifica se o CPF está completo
+cpfInput.addEventListener('input', () => {
+  const digitos = cpfInput.value.replace(/\D/g, '');   // tira pontos e traço
+  cpfContinue.disabled = digitos.length !== 11;        // desabilitado se NÃO tem 11
+});
+
+// Clicar em "Pular"
+$('#skipCpf').addEventListener('click', () => {
+  cpfInput.value = '';                                 // limpa o que foi digitado
+  cpfContinue.disabled = true;
+  cpfInput.closest('.field').classList.remove('has-error');
+  goStep(4);                                           // vai para o passo 4
+});
 
   // Passo 6: botão final
   $('#goNext').setAttribute('href', AFTER_SIGNUP_URL);

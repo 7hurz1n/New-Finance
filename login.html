@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
 
@@ -105,7 +105,7 @@
       </div>
       <div class="row">
         <label class="check"><input type="checkbox"><span></span>Manter conectado</label>
-        <a class="link" href="#">Esqueci minha senha</a>
+        <a class="link" href="nova_senha.html">Esqueci minha senha</a>
       </div>
       <button class="btn btn--primary" type="submit"><span>Entrar na minha conta</span><svg class="ic"><use href="#i-arrow"/></svg></button>
       <p class="switch">Ainda não tem uma conta? <a class="link" href="#" data-goto="register">Começar gratuitamente</a></p>
@@ -175,8 +175,12 @@
         <input id="w-cpf" type="text" inputmode="numeric" data-v="cpf" data-mask="cpf" placeholder="000.000.000-00">
         <small class="err">Esse CPF não parece válido. Confira os números.</small>
         <small class="hint">Digite apenas os números. A formatação é automática.</small></div>
-      <button class="btn btn--primary" type="submit"><span>Continuar</span><svg class="ic"><use href="#i-arrow"/></svg></button>
-      <button type="button" class="back" data-back="prev">Voltar</button>
+      <div class="actions">
+        <button type="button" class="btn btn--ghost" id="skipCpf">Pular</button>
+        <button type="submit" class="btn btn--primary" id="cpfContinue" disabled>
+          <span>Continuar</span><svg class="ic"><use href="#i-arrow"/></svg>
+        </button>
+      </div>
     </form>
 
     <!-- Passo 4 -->
@@ -252,6 +256,6 @@
 
 <div class="toast" id="toast" role="status"></div>
 
-<script src="script.js"></script>
+<script src="login.js"></script>
 </body>
 </html>

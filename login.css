@@ -101,7 +101,7 @@ button{cursor:pointer}
 
 .btn{height:46px;border:0;border-radius:var(--r-md);display:inline-flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:700;transition:transform .2s var(--ease),box-shadow .2s,filter .2s}
 .btn--primary{background:var(--yellow);color:var(--ink);width:100%}
-.btn .ic{transition:transform .25s var(--ease)}
+.btn .ic{transition:transform .25s var(--ease) ,background-color .3s,color .3s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(12,53,60,.2)}
 .btn:hover .ic{transform:translateX(4px)}
 .btn:active{transform:translateY(0)}
@@ -198,7 +198,7 @@ button{cursor:pointer}
 
 .link--btn{background:none;border:0;align-self:center;font-size:12px}
 .link--btn:disabled{opacity:.55;cursor:default;text-decoration:none}
-.back{align-self:center;background:none;border:0;font-size:11px;font-weight:600;color:#667173;display:inline-flex;gap:6px;align-items:center;transition:color .2s,transform .2s}
+.back{align-self:center;background:none;border:0;font-size:15px;font-weight:600;color:#667173;display:inline-flex;gap:6px;align-items:center;transition:color .2s,transform .2s}
 .back::before{content:"←"}
 .back:hover{color:var(--teal);transform:translateX(-3px)}
 .secure--tight{margin-top:0;padding:14px 16px;font-size:12px}
@@ -236,3 +236,16 @@ a.btn{text-decoration:none}
 .field .cnae input[type=text]{border:0;border-radius:0;background:none;height:22px;padding:0;box-shadow:none;font-size:12px;color:#5d6769}
 .field .cnae input[type=text]:first-child{font-weight:600;color:var(--ink)}
 .field .cnae input[type=text]:focus{box-shadow:none}
+
+/* Linha com os dois botões */
+.actions{display:flex;gap:12px}          /* flex = coloca lado a lado */
+.actions .btn{width:auto}                /* cancela o width:100% do .btn--primary */
+.actions .btn--primary{flex:1}           /* Continuar ocupa o espaço que sobrar */
+
+/* Botão "Pular": fundo branco com borda, discreto */
+.btn--ghost{background:var(--white);border:1.5px solid var(--teal);padding:0 28px}
+
+/* Botão desabilitado: cinza, "esperando" */
+.btn--primary:disabled{background:#d9dcdc;color:#8a9395;cursor:not-allowed}
+.btn:disabled:hover{transform:none;box-shadow:none}   /* sem o "pulinho" do hover */
+.btn:disabled:hover .ic{transform:none}               /* seta parada */
