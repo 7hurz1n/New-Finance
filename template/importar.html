@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Finance — Importar extrato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Em Flask: use url_for('static', filename='...') nos links e scripts -->
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/importar.css">
+</head>
+<body>
+
+  <!-- Ícones (sprite) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3l1.9 5.6L18.5 10.5l-5.6 1.9L11 18l-1.9-5.6L3.5 10.5l5.6-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="index.html">New <span>Finance</span></a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Início</a>
+        <a href="calculadora.html">Calculadora</a>
+        <a href="metas.html">Metas</a>
+        <a href="importar.html" aria-current="page">Importar extratos</a>
+      </nav>
+      <a class="account" href="perfil.html">
+        <svg class="icon icon--lg"><use href="#i-user"/></svg>
+        <span class="account__text"><b>Lucas Oliveira</b><small>Minha conta</small></span>
+        <svg class="icon icon--sm"><use href="#i-chevron"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <nav class="crumbs" aria-label="Você está em">
+        <a href="index.html">Meus finanças</a><span aria-hidden="true">/</span><span aria-current="page">Importar extrato</span>
+      </nav>
+
+      <div class="page-head">
+        <div>
+          <h1>Importar extrato</h1>
+          <p>Sem digitar nada. Envie o arquivo e nós organizamos tudo para você.</p>
+        </div>
+      </div>
+
+      <div class="imp">
+        <section class="up" aria-labelledby="upTitle">
+          <div class="up__head">
+            <h2 id="upTitle">Envie o extrato do seu banco</h2>
+            <div class="seg" role="radiogroup" aria-label="Tipo de conta">
+              <input type="radio" name="tipo" id="tPf" value="PF" checked><label for="tPf">PF</label>
+              <input type="radio" name="tipo" id="tPj" value="PJ"><label for="tPj">PJ</label>
+            </div>
+          </div>
+
+          <label class="drop" id="drop" for="arquivo">
+            <input class="sr-only" type="file" id="arquivo" accept=".pdf,.ofx,application/pdf">
+            <span class="drop__icon"><svg class="icon"><use href="#i-upload"/></svg></span>
+            <strong>Clique aqui ou arraste o arquivo do seu banco</strong>
+            <small>Aceitamos arquivos em PDF ou OFX</small>
+          </label>
+
+          <div class="file" id="file" hidden>
+            <svg class="icon"><use href="#i-file"/></svg>
+            <span class="file__info"><strong id="fileName"></strong><small id="fileSize"></small></span>
+            <button type="button" id="fileRemove" aria-label="Remover arquivo"><svg class="icon icon--sm"><use href="#i-close"/></svg></button>
+          </div>
+          <div class="upbar" id="prog" hidden><span id="progBar"></span></div>
+
+          <div class="up__foot">
+            <p class="secure"><svg class="icon icon--sm"><use href="#i-lock"/></svg>Seus dados são lidos com segurança e não são compartilhados.</p>
+            <button class="btn btn--sm" type="button" id="enviar" disabled>Enviar extrato <svg class="icon"><use href="#i-upload"/></svg></button>
+          </div>
+        </section>
+
+        <aside class="help" aria-labelledby="helpTitle">
+          <h2 id="helpTitle"><svg class="icon"><use href="#i-info"/></svg>Não sabe onde encontrar o extrato?</h2>
+          <ol class="steps">
+            <li><b>1</b><div><strong>Abra o aplicativo do seu banco</strong><p>Procure por "Extrato" ou "Movimentações".</p></div></li>
+            <li><b>2</b><div><strong>Escolha o período</strong><p>Selecione, por exemplo, os últimos 30 dias e toque em "Exportar" ou "Compartilhar".</p></div></li>
+            <li><b>3</b><div><strong>Salve e venha até aqui</strong><p>Escolha salvar como PDF ou OFX e envie o arquivo aqui para nós.</p></div></li>
+          </ol>
+        </aside>
+      </div>
+
+      <section class="accounts" aria-labelledby="accTitle">
+        <div class="accounts__head">
+          <h2 id="accTitle">Contas já conectadas</h2>
+          <button class="btn btn--sm" type="button" id="addConta">Adicionar outra conta <svg class="icon"><use href="#i-plus"/></svg></button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Banco</th><th scope="col">Tipo da conta</th><th scope="col">Último envio</th></tr></thead>
+            <tbody id="contas"></tbody>
+          </table>
+        </div>
+        <div class="alert" id="alerta" role="alert" hidden>
+          <svg class="icon"><use href="#i-alert"/></svg>
+          <div><strong>Não conseguimos ler o último arquivo enviado.</strong><p>Confira se o arquivo é mesmo um PDF ou OFX e tente novamente.</p></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span>Meu Negócio+ • Organize hoje. Faça seu negócio crescer.</span>
+      <nav><a href="#">Privacidade</a><a href="#">Termos de uso</a></nav>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Assistente -->
+  <section class="chat" id="chat" aria-label="Assistente financeiro">
+    <div class="chat__log" id="chatLog" aria-live="polite">
+      <p class="msg msg--bot">Olá, sou seu assistente inteligente de gestão financeira e professor nas horas vagas, como posso ajudar?</p>
+    </div>
+    <form class="chat__form" id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="comece com uma pergunta" aria-label="Sua pergunta">
+      <button class="chat__send" type="submit" aria-label="Enviar"><svg class="icon"><use href="#i-arrow"/></svg></button>
+    </form>
+  </section>
+
+  <button class="fab is-new" id="fab" type="button" aria-label="Abrir assistente" aria-expanded="false">
+    <svg class="icon i-sparkle"><use href="#i-sparkle"/></svg>
+    <svg class="icon i-close"><use href="#i-close"/></svg>
+  </button>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/importar.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+/* =====================================================================
+   cadastro.css — só o que é específico do cadastro em 6 passos
+   (o resto vem de style.css e auth.css)
+   ===================================================================== */
+
+/* Barra de progresso: 6 tracinhos. O JS põe a classe "is-done" nos já feitos. */
+.progress-head { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px; font-weight: 700; }
+.progress { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-bottom: 26px; }
+.progress i {
+  height: 6px; border-radius: 3px;
+  background: rgba(12, 53, 60, .22);
+  transition: background .4s;
+}
+.progress i.is-done { background: var(--yellow); box-shadow: inset 0 0 0 1px var(--deep); }   /* contorno escuro: amarelo sozinho some no fundo claro */
+
+/* Cada passo: só o que tem "is-active" aparece, entrando pela direita */
+.step { display: none; }
+.step.is-active { display: block; animation: slide .35s cubic-bezier(.2, .7, .2, 1) both; }
+.step h2 { margin-bottom: 14px; }
+.step h2:focus { outline: none; }
+.step .formbox__lead { margin-top: 0; }
+.step .field + .field { margin-top: 14px; }
+
+.back {
+  margin-bottom: 14px; padding: 0; border: 0; background: none;
+  color: var(--ink); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.back:hover { color: var(--deep); }
+.foot-note { margin-top: 12px; text-align: center; font-size: 11px; }
+.step .secure-card { margin: 0 0 16px; }
+.step .code { margin-top: 4px; }
+
+/* CNAE */
+.label-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; }
+.label-row label { margin: 0; }
+.badge-auto {
+  padding: 2px 8px; border: 1.5px solid var(--deep); border-radius: 6px;
+  background: var(--yellow); color: var(--ink); font-size: 9px; font-weight: 800;
+}
+.cnae {
+  display: grid; gap: 2px; padding: 10px 12px;
+  border: 1.5px solid rgba(12, 53, 60, .6); border-radius: 8px; font-size: 13px;
+}
+.cnae strong { font-size: 14px; }
+.cnae span { font-size: 12px; color: #3d4f52; }
+.cnae strong:empty { display: none; }
+.step .link { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; }
+.step .link--center { display: flex; justify-content: center; width: fit-content; margin: 14px auto 0; }
+
+/* Passo 6 */
+.done__icon {
+  display: grid; place-items: center; width: 56px; height: 56px; margin: 18px 0 14px;
+  border-radius: 50%; background: var(--deep); color: var(--yellow);
+  animation: pop .5s .2s cubic-bezier(.2, .7, .2, 1) both;
+}
+.icon--xl { width: 30px; height: 30px; stroke-width: 2.4; }
+.next { display: flex; gap: 12px; margin: 4px 0 6px; padding: 14px; border: 1.5px solid rgba(12, 53, 60, .6); border-radius: 10px; }
+.next .icon { flex: none; margin-top: 2px; }
+.next strong { font-size: 13px; }
+.next p { margin-top: 2px; font-size: 12px; line-height: 1.45; }
