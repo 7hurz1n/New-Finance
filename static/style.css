@@ -83,7 +83,7 @@ h1 { font-size: 30px; font-weight: 700; line-height: 1.15; }
 .select__list {
   position: absolute; right: 0; top: calc(100% + 6px); z-index: 20;
   min-width: 100%; list-style: none; padding: 6px;
-  background: var(--bg); border: 1.5px solid var(--yellow); border-radius: 10px;
+  background: var(--bg); border: 1.5px solid var(--ink); border-radius: 10px;
   box-shadow: 0 12px 28px rgba(12, 53, 60, .25);
   transform-origin: top right;
   animation: pop .16s ease-out;
@@ -95,6 +95,7 @@ h1 { font-size: 30px; font-weight: 700; line-height: 1.15; }
   padding: 8px 12px; border-radius: 6px; font-size: 13px; white-space: nowrap; cursor: pointer;
 }
 .select__list button:hover,
+.select__list button[aria-selected="false"]:hover { transform: scale(1.05); color: black; }
 .select__list button[aria-selected="true"] { background: var(--yellow); color: black; }
 .select__list button:focus-visible { outline: 2px solid var(--teal); }
 
