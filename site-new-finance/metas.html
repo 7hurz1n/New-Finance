@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Finance — Suas metas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Em Flask: use url_for('static', filename='...') nos links e scripts -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="metas.css">
+</head>
+<body>
+
+  <!-- Ícones (sprite) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M11 3l1.9 5.6L18.5 10.5l-5.6 1.9L11 18l-1.9-5.6L3.5 10.5l5.6-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 20h8M10 17h4"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="index.html">New <span>Finance</span></a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Início</a>
+        <a href="calculadora.html">Calculadora</a>
+        <a href="metas.html" aria-current="page">Metas</a>
+        <a href="importar.html">Importar extratos</a>
+      </nav>
+      <a class="account" href="perfil.html">
+        <svg class="icon icon--lg"><use href="#i-user"/></svg>
+        <span class="account__text"><b>Lucas Oliveira</b><small>Minha conta</small></span>
+        <svg class="icon icon--sm"><use href="#i-chevron"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <div class="page-head">
+        <div>
+          <h1>Suas metas</h1>
+          <p>Transforme seus planos em conquistas, um passo de cada vez.</p>
+        </div>
+        <button class="btn btn--sm" type="button" id="novaMeta">Criar nova meta <svg class="icon"><use href="#i-plus"/></svg></button>
+      </div>
+
+      <section class="stats" aria-label="Resumo das metas">
+        <article class="stat-card" style="--i:0">
+          <i class="stat-card__icon"><svg class="icon icon--sm"><use href="#i-target"/></svg></i>
+          <div><strong id="stAndamento">3</strong><span>Metas em andamento</span></div>
+        </article>
+        <article class="stat-card" style="--i:1">
+          <i class="stat-card__icon"><svg class="icon icon--sm"><use href="#i-trophy"/></svg></i>
+          <div><strong id="stConquistas">3</strong><span>Conquistas desbloqueadas</span></div>
+        </article>
+        <article class="stat-card" style="--i:2">
+          <i class="stat-card__icon"><svg class="icon icon--sm"><use href="#i-trend"/></svg></i>
+          <div><strong>60%</strong><span>De sucesso no mês</span></div>
+        </article>
+      </section>
+
+      <div class="metas">
+        <div class="metas__main">
+
+          <article class="feature" aria-labelledby="fTitulo">
+            <div class="feature__body">
+              <p class="feature__tag">Minha meta do mês</p>
+              <h2 id="fTitulo">Aumentar o lucro</h2>
+              <p class="feature__desc" id="fDesc"></p>
+              <p class="feature__values"><strong id="fAtual">R$ 1.200,00</strong> <span id="fAlvo">de R$ 2.000,00</span></p>
+              <div class="progress feature__bar" aria-hidden="true"><span id="fBar"></span></div>
+              <p class="feature__meta" id="fMeta"></p>
+              <div class="feature__actions">
+                <button class="btn btn--sm" type="button" id="fProg">Atualizar progresso <svg class="icon"><use href="#i-plus"/></svg></button>
+                <button class="btn btn--sm btn--ghost" type="button" id="fEdit">Editar meta</button>
+              </div>
+            </div>
+            <div class="ring" id="fRing" role="img" aria-label="60% do caminho">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring__track" cx="60" cy="60" r="52"/>
+                <circle class="ring__bar" id="fArc" cx="60" cy="60" r="52" pathLength="100"/>
+              </svg>
+              <div><strong id="fPct">60%</strong><span>do caminho</span></div>
+            </div>
+          </article>
+
+          <h2 class="metas__sub">Continue construindo seu futuro</h2>
+          <div class="goals" id="goals"></div>
+        </div>
+
+        <aside class="metas__side">
+          <section class="wins">
+            <h2>Suas conquistas</h2>
+            <p class="wins__lead">Cada novo hábito merece ser celebrado.</p>
+            <ul>
+              <li><i><svg class="icon icon--sm"><use href="#i-shield"/></svg></i><div><strong>Primeiros registros</strong><small>Você deu o primeiro passo.</small></div></li>
+              <li><i><svg class="icon icon--sm"><use href="#i-layers"/></svg></i><div><strong>Organização financeira</strong><small>Seu dinheiro mais claro.</small></div></li>
+              <li><i><svg class="icon icon--sm"><use href="#i-calc"/></svg></i><div><strong>Calculadora de preço</strong><small>Você conheceu seu preço.</small></div></li>
+            </ul>
+            <p class="kudos"><svg class="icon"><use href="#i-trophy"/></svg>Parabéns! Você está construindo uma gestão melhor para o seu negócio.</p>
+          </section>
+
+          <section class="learn">
+            <h2>Aprender também é crescer.</h2>
+            <h5>Continue aprendendo e desenvolvendo suas habilidades com nosso assistente IA.</h5>
+            <p>Ele pode te ajudar a entender melhor seus números, sugerir estratégias de crescimento e até ensinar conceitos financeiros de forma simples.</p>
+          </section>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <span>Meu Negócio+ • Organize hoje. Faça seu negócio crescer.</span>
+      <nav><a href="#">Privacidade</a><a href="#">Termos de uso</a></nav>
+    </div>
+  </footer>
+
+  <!-- Criar / editar meta -->
+  <dialog class="modal" id="dlgMeta" aria-labelledby="dmTitle">
+    <form id="formMeta" novalidate>
+      <div class="modal__head">
+        <h2 id="dmTitle">Nova meta</h2>
+        <button type="button" class="modal__close" data-close aria-label="Fechar"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="modal__body">
+        <div class="field"><label for="mNome">Nome da meta</label><input id="mNome" type="text" maxlength="60" autocomplete="off"></div>
+        <div class="row row--tight">
+          <div class="field"><label for="mAlvo">Valor da meta</label><input id="mAlvo" inputmode="decimal" autocomplete="off"></div>
+          <div class="field"><label for="mAtual">Já alcançado</label><input id="mAtual" inputmode="decimal" autocomplete="off"></div>
+        </div>
+        <div class="field"><label for="mPrazo">Prazo (opcional)</label><input id="mPrazo" type="date"></div>
+        <p class="error" id="mErro" role="alert" hidden></p>
+        <div class="modal__actions">
+          <button class="btn btn--sm" type="submit">Salvar meta</button>
+          <button class="btn btn--sm btn--red" type="button" id="mDel" hidden>Excluir</button>
+          <button class="btn btn--sm btn--ghost" type="button" data-close>Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Atualizar progresso -->
+  <dialog class="modal" id="dlgProg" aria-labelledby="dpTitle">
+    <form id="formProg" novalidate>
+      <div class="modal__head">
+        <h2 id="dpTitle">Atualizar progresso</h2>
+        <button type="button" class="modal__close" data-close aria-label="Fechar"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="modal__body">
+        <p id="pNome" class="modal__lead"></p>
+        <div class="field"><label for="pValor">Quanto você já alcançou?</label><input id="pValor" inputmode="decimal" autocomplete="off"></div>
+        <div class="modal__actions">
+          <button class="btn btn--sm" type="submit">Atualizar</button>
+          <button class="btn btn--sm btn--ghost" type="button" data-close>Cancelar</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Assistente -->
+  <section class="chat" id="chat" aria-label="Assistente financeiro">
+    <div class="chat__log" id="chatLog" aria-live="polite">
+      <p class="msg msg--bot">Olá, sou seu assistente inteligente de gestão financeira e professor nas horas vagas, como posso ajudar?</p>
+    </div>
+    <form class="chat__form" id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="comece com uma pergunta" aria-label="Sua pergunta">
+      <button class="chat__send" type="submit" aria-label="Enviar"><svg class="icon"><use href="#i-arrow"/></svg></button>
+    </form>
+  </section>
+
+  <button class="fab is-new" id="fab" type="button" aria-label="Abrir assistente" aria-expanded="false">
+    <svg class="icon i-sparkle"><use href="#i-sparkle"/></svg>
+    <svg class="icon i-close"><use href="#i-close"/></svg>
+  </button>
+
+  <script src="common.js"></script>
+  <script src="metas.js"></script>
+</body>
+</html>
