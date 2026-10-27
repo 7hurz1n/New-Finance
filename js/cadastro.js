@@ -45,11 +45,17 @@
       check(f.email, validEmail(f.email.value), 'Digite um e-mail válido.'),
       check(f.tel, !f.tel.value || validPhone(f.tel.value), 'Digite o telefone com DDD.'),
       check(f.senha, f.senha.value.length >= 8, 'A senha precisa ter pelo menos 8 caracteres.'),
+      check(f.concordoTermos, f.concordoTermos.checked, 'Você precisa concordar com os termos para continuar.'),
     ].every(Boolean);
     if (!ok) return focarErro(f);
 
-    Object.assign(data, { nome: f.nome.value.trim(), email: f.email.value.trim(), telefone: f.tel.value });
-    // A senha NÃO é guardada aqui. Com o Flask, envie tudo no fim: fetch('/api/cadastro', ...)
+    Object.assign(data, { 
+      nome: f.nome.value.trim(), 
+      email: f.email.value.trim(), 
+      telefone: f.tel.value,
+      quebrarSenhaAutomatica: f.quebrarSenhaAutomatica.checked 
+    });
+    
     $('#textoCodigo').textContent = `Enviamos um código para ${data.email}. Isso ajuda a manter sua conta segura.`;
     go(2);
   });
