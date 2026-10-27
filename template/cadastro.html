@@ -87,7 +87,7 @@
       <div class="progress-head"><span id="rotuloPasso">Passo 1 de 6</span><span>Seu cadastro</span></div>
       <div class="progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
-      <!-- Passo 1 -->
+<!-- Passo 1 -->
       <form class="step is-active" id="step1" novalidate>
         <h2 tabindex="-1">Vamos começar com você</h2>
         <div class="field">
@@ -110,6 +110,30 @@
           </div>
           <p class="hint">Use pelo menos 8 caracteres.</p>
         </div>
+
+        <!-- Nova seção de Termos, Privacidade, LGPD e Extratos Criptografados -->
+        <div class="field" style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(12, 53, 60, .15);">
+          
+          <!-- Termos e LGPD -->
+          <label class="check" style="align-items: flex-start; font-size: 11.5px; font-weight: normal; line-height: 1.45; cursor: pointer;">
+            <input type="checkbox" id="concordoTermos" name="concordoTermos" required style="margin-top: 2px; flex: none;">
+            <span>Concordo com os <a href="Termos de Uso e Politica de Privacidade - New Finance.pdf" target="_blank">Termos de Uso</a>, <a href="Termos de Uso e Politica de Privacidade - New Finance.pdf" target="_blank">Política de Privacidade</a>, diretrizes da LGPD e demais condições necessárias para a gestão do sistema bancário. Declaro estar ciente de que <strong>só é possível continuar com esta confirmação</strong> e que poderei solicitar a exclusão dos meus dados e da minha conta a qualquer momento.</span>
+          </label>
+
+          <!-- Opção de Criptografia de Extratos -->
+          <div style="margin-top: 14px; padding: 10px 12px; background: rgba(12, 53, 60, .04); border-radius: 8px; border: 1.5px solid rgba(12, 53, 60, .15);">
+            <p style="font-size: 11px; line-height: 1.45; color: var(--deep); margin-bottom: 8px;">
+              <svg class="icon icon--sm" style="vertical-align: middle; margin-right: 4px;"><use href="#i-shield"/></svg>
+              <strong>Criptografia de Extratos Bancários:</strong> Alguns extratos bancários exigem senha (geralmente seu CPF ou CNPJ) para leitura. Você pode optar por deixar a senha ativada para que o sistema processe seus extratos sem interrupções, ou desmarcar a opção para informar os dados manualmente a cada envio protegido.
+            </p>
+            <label class="check" style="font-size: 11.5px; font-weight: 600; cursor: pointer;">
+              <input type="checkbox" id="quebrarSenhaAutomatica" name="quebrarSenhaAutomatica" checked style="flex: none;">
+              <span>senha automática utilizando meus dados cadastrais (informar CPF e CNPJ) </span>
+            </label>
+          </div>
+
+        </div>
+
         <button class="btn" type="submit">Continuar <svg class="icon"><use href="#i-arrow"/></svg></button>
         <p class="formbox__alt">Já tem conta? <a href="login.html">Começar gratuitamente</a></p>
       </form>
